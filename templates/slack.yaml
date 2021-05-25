@@ -2,6 +2,6 @@ name: slack
 channel: http
 config:
   url: {{.SLACK_URL}}
-  username: GtWebhook
+  username: GtWebhook #this need to be checked how we can use
 meta:  
   text: {{.text}}
