@@ -3,7 +3,7 @@ channel: http
 config:
   url: https://accurics.atlassian.net/rest/api/3/issue
   username: cs-girish.talekar@accurics.com
-  token: xxxxxxxxxx
+  authorization: Basic {{.JIRA_TOKEN}}
 meta:  
   fields: 
     issuetype:

@@ -9,12 +9,14 @@ type Configuration struct {
 
 // Config
 type Config struct {
-	Port     int    `yaml:"port"`
-	Username string `yaml:"username"`
-	Password string `yaml:"password"`
-	Host     string `yaml:"host"`
-	Url      string `yaml:"url"`
-	Token    string `yaml:"token"`
+	Port          string `yaml:"port"`
+	Username      string `yaml:"username"`
+	Password      string `yaml:"password"`
+	Host          string `yaml:"host"`
+	Url           string `yaml:"url"`
+	Authorization string `yaml:"authorization"`
+	From          string `yaml:"from"`
+	Accept        string `yaml:"accept"`
 }
 
 type Message struct {

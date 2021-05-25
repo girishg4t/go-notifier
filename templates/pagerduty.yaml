@@ -1,0 +1,23 @@
+name: pagerduty
+channel: http
+config:
+  url: https://api.pagerduty.com/incidents
+  username: cs-girish.talekar@accurics.com
+  authorization: Token token={{.PAGERDUTY_TOKEN}}
+  from: cs-girish.talekar@accurics.com
+meta:  
+  incident: 
+    type: {{.incident.type}}
+    title: {{.incident.title}}
+    service:
+      id: {{.incident.service.id}}
+      type: {{.incident.service.type}}
+    priority:
+      id: {{.incident.priority.id}}
+      type: {{.incident.priority.type}}
+    urgency: {{.incident.urgency}}
+    incident_key: {{.incident.incident_key}}
+    body:
+      type: {{.incident.body.type}}
+      details: {{.incident.body.details}}
+    escalation_policy: null

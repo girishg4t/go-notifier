@@ -1,0 +1,6 @@
+name: teams
+channel: http
+config:
+  url: {{.TEAMS_URL}}
+meta:  
+  text: {{.text}}

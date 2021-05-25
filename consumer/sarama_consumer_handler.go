@@ -1,9 +1,13 @@
-package main
+package consumer
 
 import (
+	"fmt"
 	"log"
+	"os"
+	"strings"
 
 	"github.com/Shopify/sarama"
+	e "github.com/girishg4t/go-notifier/pkg/engine"
 	"github.com/girishg4t/go-notifier/pkg/libs"
 	jsoniter "github.com/json-iterator/go"
 	"gopkg.in/yaml.v2"
@@ -24,7 +28,7 @@ func (ConsumerGroupHandler) Cleanup(_ sarama.ConsumerGroupSession) error { retur
 // do with the message. In this example the message will be logged with the topic name, partition and message value.
 func (h ConsumerGroupHandler) ConsumeClaim(sess sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
-		//fmt.Printf("Message topic:%q partition:%d offset:%d message: %v\n",msg.Topic, msg.Partition, msg.Offset, string(msg.Value))
+		log.Printf("Message topic:%q partition:%d offset:%d message: %v\n", msg.Topic, msg.Partition, msg.Offset, string(msg.Value))
 		handleMessage(msg.Value)
 		sess.MarkMessage(msg, "")
 	}
@@ -40,9 +44,14 @@ func handleMessage(b []byte) {
 	}
 
 	//Bind message to template with data
-	ys, err := libs.GetParsedTemplate("./templates/jira.yaml", msg.Data)
+	tn := strings.ToLower(msg.Type)
+	for _, env := range os.Environ() {
+		e := strings.Split(env, "=")
+		msg.Data[e[0]] = e[1]
+	}
+	ys, err := libs.GetParsedTemplate("./templates/"+tn+".yaml", msg.Data)
 	if err != nil || ys == "" {
-		log.Panicf("Not able to parse the template %s", ys)
+		log.Panicf("Not able to parse/read the template %s", tn)
 		return
 	}
 
@@ -53,5 +62,6 @@ func handleMessage(b []byte) {
 		log.Fatalf("error while converting to configuration struct: %v", err)
 		return
 	}
-	log.Println(c)
+	fmt.Println(c)
+	e.Process(c)
 }

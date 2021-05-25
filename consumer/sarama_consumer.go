@@ -1,4 +1,4 @@
-package main
+package consumer
 
 import (
 	"context"
@@ -10,6 +10,7 @@ import (
 )
 
 var (
+	kafkaBrokers    = []string{"localhost:9093"}
 	kafkaTopics     = []string{"sarama_topic"}
 	consumerGroupID = "sarama_consumer"
 )

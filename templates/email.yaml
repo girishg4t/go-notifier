@@ -1,0 +1,12 @@
+name: email
+channel: smtp
+config:
+  host: localhost
+  port: 2500
+  username: 
+  password:
+meta:  
+  subject: {{.subject}}
+  from: {{.from}}
+  text: {{.text}}
+  to: {{.to}}

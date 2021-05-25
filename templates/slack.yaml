@@ -1,0 +1,7 @@
+name: slack
+channel: http
+config:
+  url: {{.SLACK_URL}}
+  username: GtWebhook
+meta:  
+  text: {{.text}}
