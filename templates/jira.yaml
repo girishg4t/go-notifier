@@ -1,0 +1,13 @@
+name: jira
+channel: http
+config:
+  url: https://accurics.atlassian.net/rest/api/3/issue
+  username: cs-girish.talekar@accurics.com
+  token: xxxxxxxxxx
+meta:  
+  fields: 
+    issuetype:
+      name: {{.fields.issuetype.name}}
+    project:
+      key: {{.fields.project.key}}
+    summary: {{.fields.summary}}    

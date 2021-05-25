@@ -1,0 +1,14 @@
+{
+    "type": "jira",
+    "data": {
+        "fields": {
+            "issuetype": {
+                "name": "Task"
+            },
+            "project": {
+                "key": "ALT"
+            },
+            "summary": "Making it work using yaml"
+        }
+    }
+}
